@@ -1,0 +1,32 @@
+name: "portland"
+run-name: "saffronfield"
+"on":
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+jobs:
+  THORN:
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+    concurrency:
+      group: "FIELD"
+      cancel-in-progress: true
+    runs-on: ubuntu-24.04
+    environment:
+      name: "github-pages"
+      url: ${{ steps.mosaic.outputs.page_url }}
+    steps:
+      - name: "Orbit"
+        uses: actions/checkout@v4
+      - name: "basin"
+        uses: actions/configure-pages@v5
+      - name: "ARROW"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./
+      - name: "CHARTREUSE"
+        id: mosaic
+        uses: actions/deploy-pages@v4
